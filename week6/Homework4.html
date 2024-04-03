@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>table loop</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: auto; 
+        }
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        }
+      th {
+        background-color: #f2f2f2;
+        }
+      .pink {
+        color: pink;
+      }
+      .blue {
+        color: blue;
+        font-weight: bold; 
+      }
+      .red {
+        color: red;
+        font-weight: bold; 
+      }
+      .green {
+        color: green;
+        font-weight: bold; 
+      }
+    </style>
+  </head>
+  <body>
+    <table id="multiplicationTable"></table>
+
+    <script>
+      var table = document.getElementById("multiplicationTable");
+
+      for (var i = 0; i < 12; i++) {
+        var row = document.createElement("tr");
+        
+        for (var j = 0; j < 11; j++) {
+          var cell = document.createElement("td");
+          
+          if (i === 0 && j === 0) {
+            cell.textContent = "x";
+            cell.className = "pink";
+          } else if (i === 0) {
+            cell.textContent = j;
+            cell.className = "blue";
+          } else if (j === 0) {
+            cell.textContent = i;
+            cell.className = "red";
+          } else {
+            var num;
+            if (j === 10) {
+              num = i * 10;
+            } else {
+              num = i * j;
+            }
+            cell.textContent = num;
+            if (i === j) {
+              cell.className = "green";
+            }
+          }
+          
+          row.appendChild(cell);
+        }
+        
+        table.appendChild(row);
+      }
+    </script>
+  </body>
+</html>

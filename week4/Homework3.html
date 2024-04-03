@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+function updateCommentCharCount(){
+    var textarea = document.getElementById('comments');
+    var numLeft = 255 - textarea.value.length;
+    document.getElementById('numleft').innerText = numLeft;
+}
+
+
+function updateNameCharCount(){
+    var fullNameInput = document.getElementById('fullname');
+    var numLeft = 20 - fullNameInput.value.length;
+    document.getElementById('numleft_name').innerText = numLeft;
+}
+</script>
+</head>
+<body>
+<form action="" method="post">
+    
+    <input type="text" name="fullname" id="fullname" placeholder="Full Name" oninput="updateNameCharCount()" maxlength="20"><span class="err"></span>
+    <span id="numleft_name">20</span> characters left!<br>
+
+    <br>
+    
+    <textarea id="comments" oninput="updateCommentCharCount()" maxlength="255" style="width: 300px; height: 150px;"></textarea>
+    <div id="showcomment">You have <span id="numleft">255</span> characters left!</div>
+    
+    
+    <input type="submit" name="submit" value="Enter">
+</form>
+</body>
+</html>
