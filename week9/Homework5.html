@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Validate me</title>
+<script>
+function validateMe() {
+    var form = document.getElementsByTagName("form")[0];
+    var inputs = form.getElementsByTagName("input");
+    var textareas = form.getElementsByTagName("textarea");
+    var selects = form.getElementsByTagName("select");
+    var isValid = true;
+
+    
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === "text" && inputs[i].value.trim() === "") {
+            isValid = false;
+            alert("Please enter your full name");
+            return false;
+        }
+    }
+
+    
+    var radioChecked = false;
+    var radios = form.elements["year"];
+    for (var j = 0; j < radios.length; j++) {
+        if (radios[j].checked) {
+            radioChecked = true;
+            break;
+        }
+    }
+    if (!radioChecked) {
+        isValid = false;
+        alert("Please select your year in college");
+        return false;
+    }
+
+    
+    var checkboxChecked = false;
+    var checkboxes = form.elements["hobbies[]"];
+    for (var k = 0; k < checkboxes.length; k++) {
+        if (checkboxes[k].checked) {
+            checkboxChecked = true;
+            break;
+        }
+    }
+    if (!checkboxChecked) {
+        isValid = false;
+        alert("Please select at least one hobby");
+        return false;
+    }
+
+    
+    var select = form.elements["show"];
+    if (select.selectedIndex === 0) {
+        isValid = false;
+        alert("Please select your favorite show");
+        return false;
+    }
+
+    
+    for (var l = 0; l < textareas.length; l++) {
+        if (textareas[l].value.trim() === "") {
+            isValid = false;
+            alert("Please enter your comments");
+            return false;
+        }
+    }
+
+    
+    if (isValid) {
+        form.reset(); 
+    }
+
+    
+    return isValid;
+}
+</script>
+</head>
+<body>
+At least one piece of data has to come in from every input type.
+<form action="#" method="get" onsubmit="return validateMe();"><br>
+Name:<input type="text" id="test" name="fullname" placeholder="Enter Full Name"><br>
+Year in College:<br>
+First Year<input type="radio" name="year" value="First Year">
+Second Year<input type="radio" name="year" value="Second Year">
+Third Year<input type="radio" name="year" value="Third Year"><br>
+
+Hobbies<br>
+Baseball <input type="checkbox" name="hobbies[]" value="baseball">  
+Football <input type="checkbox" name="hobbies[]" value="football">  
+Hockey <input type="checkbox" name="hobbies[]" value="hockey"><br>
+Favorite Show <select name="show">
+<option value="">Choose Below</option>
+<option value="ATHF">Aqua Teen Hunger Force</option>
+<option value="Family Guy">Family Guy</option>
+<option value="Simpsons">Simpsons</option>
+</select><br>
+Comments<br>
+<textarea cols="50" rows="6" name="comments"></textarea><br>
+<input type="submit" name="submit" value="enter me">
+</form>
+</body>
+</html>

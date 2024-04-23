@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather API Demo</title>
+</head>
+<body>
+
+<div id="weatherInfo">
+    <h2>Weather Information</h2>
+    <p id="weatherDescription">Loading...</p>
+    <p id="temperature">Loading...</p>
+</div>
+
+<script>
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+        var status = xhr.status;
+        if (status == 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status);
+        }
+    };
+    xhr.send();
+};
+
+// Function to fetch weather API
+function fetchWeather() {
+    var apiUrl = 'https://mm214.com/jsondemo.php';
+    getJSON(apiUrl, function(err, data) {
+        if (err != null) {
+            alert('Something went wrong: ' + err);
+        } else {
+            var weatherDescription = data.weather[0].description;
+            var temperature = data.main.temp;
+            document.getElementById('weatherDescription').textContent = 'Weather: ' + weatherDescription;
+            document.getElementById('temperature').textContent = 'Temperature: ' + temperature + '°C';
+        }
+    });
+}
+
+// Call the function to fetch weather data
+fetchWeather();
+
+</script>
+
+</body>
+</html>

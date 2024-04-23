@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+</head>
+<body>
+    <h1>Weather Information</h1>
+    <div id="weather-info"></div>
+
+    <script>
+        // 使用Ajax请求API链接
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://mm214.com/jsondemo.php', true);
+
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // 如果请求成功，则解析JSON数据
+                var data = JSON.parse(xhr.responseText);
+                // 获取天气描述和温度信息
+                var description = data.weather[0].description;
+                var temperature = data.main.temp;
+                // 在页面上显示天气信息
+                document.getElementById('weather-info').innerHTML = '<p>Description: ' + description + '</p><p>Temperature: ' + temperature + '°C</p>';
+            } else {
+                // 如果请求失败，则显示错误信息
+                document.getElementById('weather-info').innerHTML = '<p>Failed to fetch weather information.</p>';
+            }
+        };
+
+        xhr.onerror = function() {
+            // 如果发生错误，则显示错误信息
+            document.getElementById('weather-info').innerHTML = '<p>An error occurred while fetching weather information.</p>';
+        };
+
+        // 发送Ajax请求
+        xhr.send();
+    </script>
+</body>
+</html>
